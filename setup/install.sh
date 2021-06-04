@@ -1,13 +1,12 @@
 #!/bin/bash
-
-# Install EPEL repository (if needed)
-if [ ! "$(rpm -qa | grep epel-release)" ]; then
-    yum -y install epel-release
+# Install sudo (if needed)
+if [ ! "$(ps waxu | grep sudo)" ]; then
+    apt-get install sudo
 fi
 
 # Install redis (if needed)
-if [ ! "$(rpm -qa | grep redis)" ]; then
-    yum -y install redis
+if [ ! "$(ps waxu | grep redis-server)" ]; then
+    apt-get install redis-server
 fi
 
 # Determine PHP version
@@ -36,7 +35,7 @@ if [ ! "$(cat /usr/local/lib/php.conf.d/20-custom.ini | grep redis.so)" ]; then
 fi
 
 # Restart apache
-systemctl restart httpd
+sudo /bin/systemctl restart httpd
 
 # Remount /tmp with noexec permissions (if needed)
 if [ "$REMOUNT_TMP" = true ] ; then
@@ -49,21 +48,21 @@ mkdir -p /etc/redis/instances
 # Chown instances folder
 chown -R redis.redis /etc/redis/instances
 
-# Remove existing systemctl script
+# Remove existing sudo /bin/systemctl script
 rm -f /lib/systemd/system/redis.service
 
-# Copy new systemctl scripts
+# Copy new sudo /bin/systemctl scripts
 cp -a redis@.service /lib/systemd/system/
 cp -a redis.service /lib/systemd/system/
 
-# Reload systemctl daemons
-systemctl daemon-reload
+# Reload sudo /bin/systemctl daemons
+sudo /bin/systemctl daemon-reload
 
 # Enable main service
-systemctl enable redis.service
+sudo /bin/systemctl enable redis.service
 
 # Copy sudoers file
-cp -a redis.sudoers /etc/sudoers.d/redis
+# cp -a redis.sudoers /etc/redis
 
 # Fix sudoers file permissions
-chown root.root /etc/sudoers.d/redis
+chown root.root /etc/redis
