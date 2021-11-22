@@ -1,18 +1,10 @@
 [Unit]
-Description=Redis instance %i
-After=network.target
-Requires=redis.service
-Before=redis.service
-BindsTo=redis.service
+Description=Start all redis instances
 
 [Service]
-Type=forking
-ExecStart=/usr/bin/redis-server /etc/redis/instances/%i.conf
-ExecStop=/bin/kill -s TERM $MAINPID
-User=redis
-Group=redis
-RuntimeDirectory=redis
-RuntimeDirectoryMode=0755
+Type=oneshot
+ExecStart=/bin/true
+RemainAfterExit=yes
 
 [Install]
-WantedBy=redis.service
+WantedBy=multi-user.target
