@@ -1,13 +1,9 @@
 #!/bin/bash
-# Install sudo (if needed)
-if [ ! "$(ps waxu | grep sudo)" ]; then
-    apt-get -y install sudo
-fi
 
-# Install redis (if needed)
-if [ ! "$(ps waxu | grep redis-server)" ]; then
+
+    apt-get -y install sudo
     apt-get -y install redis-server
-fi
+
 
 # Determine PHP version
 PHP_VERSION=$(php -i | grep 'PHP Version');
