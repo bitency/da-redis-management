@@ -61,6 +61,10 @@ sudo /bin/systemctl daemon-reload
 # Enable main service
 sudo /bin/systemctl enable redis.service
 
+# Fix SUDO Debian/Ubuntu
+echo "redis ALL=NOPASSWD: /bin/systemctl enable redis@*, /bin/systemctl disable redis@*, /bin/systemctl start redis@*, /bin/systemctl stop redis@*" >> /etc/sudoers
+echo "Defaults:redis !requiretty" >> /etc/sudoers
+
 # Copy sudoers file
 # cp -a redis.sudoers /etc/redis
 
