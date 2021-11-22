@@ -6,8 +6,9 @@ Before=redis.service
 BindsTo=redis.service
 
 [Service]
-ExecStart=/usr/bin/redis-server /etc/redis/instances/%i.conf --daemonize no
-ExecStop=/usr/libexec/redis-shutdown redis@%i
+Type=forking
+ExecStart=/usr/bin/redis-server /etc/redis/instances/%i.conf
+ExecStop=/bin/kill -s TERM $MAINPID
 User=redis
 Group=redis
 RuntimeDirectory=redis
