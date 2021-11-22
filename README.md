@@ -11,30 +11,27 @@ Defaults:redis !requiretty
 
 
 
-# DirectAdmin SSH Key Management Plugin
+# DirectAdmin REDIS Management Plugin
 Welcome to this repository of an unofficial DirectAdmin plugin for managing Redis instances. 
 
 With this plugin end-users on an DirectAdmin server can easliy add and remove their redis instances.
 
 I developed and used this plugin for over a year now on our own servers, but I decided to release it to the public! So everyone can use this.
 
-# Installation
-## Requirements
-This plugin works on every DirectAdmin server, but the included setup script is only for RHEL/CentOS with systemctl support. Maybe I will add install scripts for Ubuntu / Debian in the future.
 
-For enabeling, starting and stopping for redis instances it uses sudo with minimal permissions.
-## Plugin installation
+# Installation
+
 ```
-cd /usr/local/directadmin/plugins
 git clone https://github.com/bitency/da-redis-management.git redis_management
+cd /usr/local/directadmin/plugins/redis_management/setup
+sh install.sh
+cd /usr/local/directadmin/plugins
 sh redis_management/scripts/install.sh
 ```
 
-## Redis installation
-```
-cd /usr/local/directadmin/plugins/redis_management/setup
-sh install.sh
-```
+
+
+
 
 # Configuration
 By default, the plugin is working out-of-the box. But it can be needed to change serveral configuration settings.
