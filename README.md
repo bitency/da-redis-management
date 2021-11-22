@@ -2,9 +2,12 @@
 
 then you should edit sudoers use visudo or vim /etc/sudoers and add this line:
 
+
 redis ALL=NOPASSWD: /bin/systemctl enable redis@*, /bin/systemctl disable redis@*, /bin/systemctl start redis@*, /bin/systemctl stop redis@*
 
 Defaults:redis !requiretty
+
+
 
 
 
