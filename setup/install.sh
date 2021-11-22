@@ -52,10 +52,12 @@ cp -a redis@.service /lib/systemd/system/
 cp -a redis.service /lib/systemd/system/
 
 # Reload sudo /bin/systemctl daemons
+systemctl daemon-reload
 sudo /bin/systemctl daemon-reload
 
 # Enable main service
-sudo /bin/systemctl enable redis.service
+systemctl enable redis@.service
+sudo /bin/systemctl enable redis@.service
 
 # Fix SUDO Debian/Ubuntu
 echo "redis ALL=NOPASSWD: /bin/systemctl enable redis@*, /bin/systemctl disable redis@*, /bin/systemctl start redis@*, /bin/systemctl stop redis@*" >> /etc/sudoers
