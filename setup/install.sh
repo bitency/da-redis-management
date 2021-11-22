@@ -1,12 +1,12 @@
 #!/bin/bash
 # Install sudo (if needed)
 if [ ! "$(ps waxu | grep sudo)" ]; then
-    apt-get install sudo
+    apt-get -y install sudo
 fi
 
 # Install redis (if needed)
 if [ ! "$(ps waxu | grep redis-server)" ]; then
-    apt-get install redis-server
+    apt-get -y install redis-server
 fi
 
 # Determine PHP version
@@ -31,7 +31,7 @@ fi
 
 # Enable redis php extension in custom php.ini (if not enabled yet)
 if [ ! "$(cat /usr/local/lib/php.conf.d/20-custom.ini | grep redis.so)" ]; then
-    echo -e "\n; Redis\nextension=redis.so" >> /usr/local/lib/php.conf.d/20-custom.ini
+    echo -e "\n; Redis\nextension=redis.so" >> /usr/local/php*/lib/php.conf.d/*-custom.ini
 fi
 
 # Restart apache
@@ -49,7 +49,7 @@ mkdir -p /etc/redis/instances
 chown -R redis.redis /etc/redis/instances
 
 # Remove existing sudo /bin/systemctl script
-rm -f /lib/systemd/system/redis.service
+rm -f /lib/systemd/system/redis*
 
 # Copy new sudo /bin/systemctl scripts
 cp -a redis@.service /lib/systemd/system/
