@@ -22,8 +22,8 @@ I developed and used this plugin for over a year now on our own servers, but I d
 # Installation
 
 ```
-git clone https://github.com/bitency/da-redis-management.git redis_management
 cd /usr/local/directadmin/plugins
+git clone https://github.com/bitency/da-redis-management.git redis_management
 sh redis_management/scripts/install.sh
 cd /usr/local/directadmin/plugins/redis_management/setup
 sh install.sh
