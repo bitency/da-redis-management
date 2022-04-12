@@ -21,10 +21,23 @@ do
 	then
   		echo "$redisid is running"	
 	else
-  		echo "$redisid is not running"
-		systemctl restart redis
-		service redis restart
-		echo -e "Redis restart host: $hostname" | mail -s "Redis restart host: $hostname" mail@mail.nl
+
+		sleep 1m
+	
+			testredis2=0
+			testredis2=`ps -aux | grep -c "[1]27.0.0.1:$redisid"`
+
+		if [[ $testredis2 == 1 ]]
+		then
+  			echo "$redisid is running"	
+		else
+  			echo "$redisid is not running"
+			systemctl restart redis
+			service redis restart
+			echo -e "Redis restart host: $hostname" | mail -s "Redis restart host: $hostname" mail@mail.nl
+
+		fi
+
 	fi
 	      
 
