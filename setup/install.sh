@@ -3,6 +3,11 @@
 
     apt-get -y install sudo
     apt-get -y install redis-server
+    
+    yum -y install redis
+    
+    mkdir /var/lib/redis
+chown -R redis:redis /var/lib/redis
 
 
 # Determine PHP version
