@@ -10,6 +10,15 @@
 chown -R redis:redis /var/lib/redis
 
 
+systemctl enable redis@service
+
+ln -s /etc/redis.conf /etc/redis/redis.conf
+
+sed -i 's/daemonize no/daemonize yes/g' input.file /etc/redis/redis.conf
+systemctl restart redis
+
+
+
 # Determine PHP version
 PHP_VERSION=$(php -i | grep 'PHP Version');
 
