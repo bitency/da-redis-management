@@ -14,7 +14,7 @@ systemctl enable redis@service
 
 ln -s /etc/redis.conf /etc/redis/redis.conf
 
-sed -i 's/daemonize no/daemonize yes/g' input.file /etc/redis/redis.conf
+sed -i 's/daemonize no/daemonize yes/g' /etc/redis/redis.conf
 systemctl restart redis
 
 
